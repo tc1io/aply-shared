@@ -1,9 +1,7 @@
 use maud::*;
 
-// Taken from https://bulma.io/documentation/overview/start/
 pub fn head(page_title: &str) -> Markup {
     html! {
-
         head {
             title { (page_title) }
             meta charset="utf-8";
@@ -16,8 +14,6 @@ pub fn head(page_title: &str) -> Markup {
 }
 
 //<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
-
 
 //script defer? src="https://use.fontawesome.com/releases/v5.1.0/js/all.js";
 //link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous";
