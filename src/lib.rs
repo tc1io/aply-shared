@@ -2,6 +2,7 @@ extern crate maud;
 
 pub mod page;
 pub mod web;
+pub mod db;
 
 extern crate serde;
 extern crate serde_json;
