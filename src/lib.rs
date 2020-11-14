@@ -7,7 +7,7 @@ pub mod ply;
 
 extern crate serde;
 extern crate serde_json;
-#[macro_use]
+//#[macro_use]
 extern crate serde_derive;
 
 #[cfg(test)]
