@@ -1,8 +1,11 @@
 //use super::ply;
 use std::marker::PhantomData;
 use crate::db::Data::Single;
-
 use thiserror::Error;
+use std::fs::File;
+use serde_json::from_reader;
+use std::sync::{Arc, Mutex};
+use crate::ply::Assembly;
 
 #[derive(Error, Debug)]
 pub enum DbError {
@@ -24,10 +27,23 @@ pub enum DbError {
 // for accessing eg Google Datastore API.
 pub struct Db {
     //handle: Handle,
+   pub init_db: Arc<Mutex<Vec<Assembly>>>
 }
 pub fn new() -> Db {
     Db {
-        //handle:Handle{},
+        init_db: Arc::new(Mutex::new(vec![]))
+    }
+}
+pub type Db1 = Arc<Mutex<Vec<Assembly>>>;
+pub fn init_db() -> Db1 {
+    let file = File::open("/Users/neild/github/aply-shared/src/db/org.json");
+    match file {
+        Ok(json) => {
+            let org = from_reader(json).unwrap();
+            Arc::new(Mutex::new(org))
+        }
+        // if there is no data it returns empty Vector
+        Err(_) => Arc::new(Mutex::new(Vec::new())),
     }
 }
 
@@ -39,7 +55,6 @@ impl Db {
     pub fn handle<T:Default + Element + Clone + From<DbEntity>>(&self) -> Handle<T> {
         Handle::new()
     }
-
 }
 
 #[derive(Debug, Clone)]

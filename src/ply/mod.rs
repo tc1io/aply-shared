@@ -3,13 +3,17 @@ use super::db;
 
 #[derive(Serialize, Deserialize, Clone, Default)]
 pub struct Assembly {
-    pub name: String
-}
+    pub org_id: String,
+    pub domain: String,
+    pub org_name: String,
 
+}
 impl From<db::DbEntity> for Assembly {
     fn from(d: db::DbEntity) -> Self {
         Assembly{
-            name:d.0
+            org_id: d.0.to_string(),
+            domain: d.0.to_string(),
+            org_name: d.0.to_string(),
         }
     }
 }
