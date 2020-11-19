@@ -25,29 +25,34 @@ pub enum DbError {
 // DB connection that maintains any shared state needed by all remote
 // handles (See Handle struct). Example would ge auth tokens generated
 // for accessing eg Google Datastore API.
+
+
+pub type Db1 = Arc<Mutex<Vec<Assembly>>>;
+#[derive()]
 pub struct Db {
     //handle: Handle,
-   pub init_db: Arc<Mutex<Vec<Assembly>>>
+    db1: Db1,
 }
-pub fn new() -> Db {
+
+pub fn new(tdb: Db1) -> Db {
     Db {
-        init_db: Arc::new(Mutex::new(vec![]))
-    }
-}
-pub type Db1 = Arc<Mutex<Vec<Assembly>>>;
-pub fn init_db() -> Db1 {
-    let file = File::open("/Users/neild/github/aply-shared/src/db/org.json");
-    match file {
-        Ok(json) => {
-            let org = from_reader(json).unwrap();
-            Arc::new(Mutex::new(org))
-        }
-        // if there is no data it returns empty Vector
-        Err(_) => Arc::new(Mutex::new(Vec::new())),
+        db1: tdb
     }
 }
 
-pub struct DbEntity(pub String);
+pub fn init() -> Db1 {
+    let file = File::open("/Users/neild/github/aply-shared/src/db/org.json");
+    match file {
+                Ok(json) => {
+                    let org = from_reader(json).unwrap();
+                    Arc::new(Mutex::new(org))
+                }
+                // if there is no data it returns empty Vector
+                Err(_) => Arc::new(Mutex::new(Vec::new())),
+                    }
+                }
+
+    pub struct DbEntity(pub String);
 
 impl Db {
 
