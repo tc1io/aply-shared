@@ -62,6 +62,7 @@ impl Db {
     pub fn handle<T:Default + Element + Clone + From<DbEntity>>(&self) -> Handle<T> {
         Handle::new()
     }
+
 }
 
 #[derive(Debug, Clone)]
@@ -78,34 +79,14 @@ impl<T:Default + Element + Clone + From<DbEntity>> Handle<T> {
     }
 
     // Dummy implementation of a DB retrieval
-   // pub async fn get(&self, id: &str) -> impl std::future::Future<Output=std::result::Result<Data<T>, DbError>> {
+    pub fn get(&self, id: &str) -> impl std::future::Future<Output=std::result::Result<Data<T>, DbError>> {
         //let assembly = ply::System{name:String::from(id)};
         //std::future::ready(std::result::Result::Ok(assembly))
-        //let db_entity = DbEntity(String::from(id));
-        // let db_entity = DbEntity(String::from(id));
-        // let s:T = db_entity.into();
-        // let d = Single(s);
-        // std::future::ready(std::result::Result::Ok(d))
+        let db_entity = DbEntity(String::from(id));
+        let s:T = db_entity.into();
+        let d = Single(s);
+        std::future::ready(std::result::Result::Ok(d))
 
-    
-    //// TEST
-   pub async fn get1(id: String,db: db::Handle<ply::Assembly>) -> impl std::future::Future<Output=std::result::Result<Data<T>, DbError>> {
-        //let assembly = ply::System{name:String::from(id)};
-        //std::future::ready(std::result::Result::Ok(assembly))
-        //let db_entity = DbEntity(String::from(id));
-        // let db_entity = DbEntity(String::from(id));
-        // let s:T = db_entity.into();
-        // let d = Single(s);
-        // std::future::ready(std::result::Result::Ok(d))
-
-   //pub async fn htmlg(id: String,db: db::Handle<ply::Assembly>) -> Result<impl warp::Reply, warp::Rejection> {
-        let orgs = Db::db1.lock().await;
-        for org in orgs.iter() {
-            if org.id == id {
-               return Ok(Box::new(warp::reply::json(&org)));
-            }
-        }
-        Ok(Box::new(StatusCode::NOT_FOUND))
     }
 }
 
@@ -146,4 +127,25 @@ pub trait Element {
     fn merge(&mut self,rhs:&Self);
     fn fmerge(self,rhs:&Self) -> Self;
 }
+
+
+//// TEST
+// pub async fn get1(id: String,db: db::Handle<ply::Assembly>) -> impl std::future::Future<Output=std::result::Result<Data<T>, DbError>> {
+//      //let assembly = ply::System{name:String::from(id)};
+//      //std::future::ready(std::result::Result::Ok(assembly))
+//      //let db_entity = DbEntity(String::from(id));
+//      // let db_entity = DbEntity(String::from(id));
+//      // let s:T = db_entity.into();
+//      // let d = Single(s);
+//      // std::future::ready(std::result::Result::Ok(d))
+//
+// //pub async fn htmlg(id: String,db: db::Handle<ply::Assembly>) -> Result<impl warp::Reply, warp::Rejection> {
+//      let orgs = Db::db1.lock().await;
+//      for org in orgs.iter() {
+//          if org.id == id {
+//             return Ok(Box::new(warp::reply::json(&org)));
+//          }
+//      }
+//      Ok(Box::new(StatusCode::NOT_FOUND))
+//  }
 
