@@ -57,9 +57,10 @@ impl<T:Default + Element + Clone + From<DbEntity>> Handle<T> {
 
     // Dummy implementation of a DB retrieval
     pub fn get(&self, id: &str) -> impl std::future::Future<Output=std::result::Result<Data<T>, DbError>> {
-        //let assembly = ply::System{name:String::from(id)};
-        //std::future::ready(std::result::Result::Ok(assembly))
+        // Get raw data from database
+        // Think of DB entity in terms of DB-row or bytes
         let db_entity = DbEntity(String::from(id));
+        // Try to resolve any conflicts
         let s:T = db_entity.into();
         let d = Single(s);
         std::future::ready(std::result::Result::Ok(d))
@@ -80,19 +81,12 @@ pub enum Data<T:Element> {
 }
 
 impl<T:Element> Data<T> {
-    // Helper function so we can work even if the actual workings of the data replication is not yet done
-    pub fn extract_one(self) -> T {
-        match self {
-            Self::Single(d) => d,
-            Self::Many{head,..} => head
-        }
-    }
 
     // Helper function so we can work even if the actual workings of the data replication is not yet done
-    pub fn force_resolve(self) -> T {
+    pub fn force_reduce(self) -> T {
         match self {
             Self::Single(s) => s,
-            Self::Many{head,tail} => tail.iter().fold(head,T::fmerge),
+            Self::Many{head,tail} => tail.iter().fold(head,T::force_merge),
         }
     }
 
@@ -101,7 +95,24 @@ impl<T:Element> Data<T> {
 // The contract that all CRDT type elements need to implement
 // so merges can happen or conflicts can be made explicit.
 pub trait Element {
-    fn merge(&mut self,rhs:&Self);
-    fn fmerge(self,rhs:&Self) -> Self;
+    //fn merge(&mut self,rhs:&Self) -> ?;
+    fn force_merge(self,rhs:&Self) -> Self;
 }
 
+
+
+impl From<DbEntity> for ply::model::Assembly {
+    fn from(d: DbEntity) -> Self {
+        ply::model::Assembly{
+            name:d.0,
+            description: "Assembly created from plain ID-string without any other data".to_owned(),
+        }
+    }
+}
+
+impl Element for ply::model::Assembly {
+    fn force_merge(self, _rhs:&ply::model::Assembly) -> ply::model::Assembly {
+        // TODO need to deal with rhs
+        self.clone()
+    }
+}
