@@ -13,6 +13,10 @@ serde_json = "1.0"
 serde_derive = "1.0"
 maud = "0.21.0"
 jsonwebtoken = "7.2.0"
+futures = "0.3.7"
+
+firestore_grpc = "0.1"
+hyper = "0.13"
 
 ply = { git = "https://github.com/plykit/ply-rust.git" }
 
