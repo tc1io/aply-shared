@@ -1,4 +1,4 @@
-use super::BoxError;
+use super::FsClientError;
 use hyper::{body, Body, Client, Method, Request};
 use serde::{Deserialize, Serialize};
 
@@ -9,7 +9,8 @@ struct TokenResponse {
     token_type: String,
 }
 
-pub async fn get_token() -> std::result::Result<String, BoxError> {
+/// TODO doc
+pub async fn get_token() -> std::result::Result<String, FsClientError> {
     let bytes = get_metadata(
         "instance/service-accounts/default/token?scopes=https://www.googleapis.com/auth/datastore",
     )
@@ -19,13 +20,15 @@ pub async fn get_token() -> std::result::Result<String, BoxError> {
     Ok(token)
 }
 
-pub async fn get_project_id() -> std::result::Result<String, BoxError> {
+/// TODO doc
+pub async fn get_project_id() -> std::result::Result<String, FsClientError> {
     let bytes = get_metadata("project/project-id").await?;
     let project_id = String::from_utf8(bytes.to_vec())?;
     Ok(project_id)
 }
 
-pub async fn get_metadata(entry: &'static str) -> std::result::Result<body::Bytes, BoxError> {
+/// TODO doc
+pub async fn get_metadata(entry: &'static str) -> std::result::Result<body::Bytes, FsClientError> {
     let request = Request::builder()
         .method(Method::GET)
         .uri(format!(

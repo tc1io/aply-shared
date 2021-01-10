@@ -1,8 +1,8 @@
 use serde_json;
 use serde::{Serialize, Deserialize};
-//use jsonwebtoken::{encode, decode, Header, Algorithm, Validation, EncodingKey, DecodingKey};
 use jsonwebtoken::{ decode,  Algorithm, Validation, DecodingKey};
 use std::result::Result;
+//use jsonwebtoken::{encode, decode, Header, Algorithm, Validation, EncodingKey, DecodingKey};
 
 #[derive(Clone)]
 pub struct User {
