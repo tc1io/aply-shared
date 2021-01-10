@@ -47,6 +47,7 @@ pub enum FsClientError {
     FooError(#[from] std::string::FromUtf8Error ),
 }
 
+// <<<<<<< HEAD
 pub async fn get_client() -> Result<FirestoreClient<Channel>, FsClientError> {
     // let mut addr = return match env::var("FIRESTORE_EMULATOR_HOST") {
         match env::var("FIRESTORE_EMULATOR_HOST") {
@@ -55,6 +56,12 @@ pub async fn get_client() -> Result<FirestoreClient<Channel>, FsClientError> {
             let endpoint = Channel::from_static("http://localhost:8200");
             // let add: &'static str = addr.;
             // let endpoint = Channel::from_static(add);
+// // =======
+// pub async fn get_client() -> Result<FirestoreClient<Channel>, BoxError> {
+//     let mut addr = return match env::var("FIRESTORE_EMULATOR_HOST") {
+//         Ok(addr) => {
+//             let endpoint = Channel::from_shared(addr.clone())?;
+// // >>>>>>> 52f029b705a5f1385d038312982ea2837c09a9d4
             let channel = endpoint.connect().await?;
             let service = FirestoreClient::with_interceptor(channel, move |mut req: Request<()>| {
                 req.metadata_mut();
