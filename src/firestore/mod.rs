@@ -19,10 +19,7 @@ use std::borrow::Borrow;
 pub async fn get_client() -> Result<FirestoreClient<Channel>, BoxError> {
     let mut addr = return match env::var("FIRESTORE_EMULATOR_HOST") {
         Ok(addr) => {
-            // TODO : need to get the value from addr instead of hard-coded values
-            let endpoint = Channel::from_static("http://localhost:8200");
-            // let add: &'static str = addr.;
-            // let endpoint = Channel::from_static(add);
+            let endpoint = Channel::from_shared(addr.clone())?;
             let channel = endpoint.connect().await?;
             let service = FirestoreClient::with_interceptor(channel, move |mut req: Request<()>| {
                 req.metadata_mut();
