@@ -18,6 +18,7 @@ http = "0.2"
 
 firestore_grpc = "0.1"
 pubsub_grpc = "0.1"
+datastore_grpc = "0.1.1"
 hyper = "0.13"
 
 ply = { git = "https://github.com/plykit/ply-rust.git" }
