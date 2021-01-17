@@ -9,6 +9,7 @@ pub mod page;
 pub mod web;
 pub mod db;
 pub mod firestore;
+pub mod pubsub;
 
 #[cfg(test)]
 mod tests {
