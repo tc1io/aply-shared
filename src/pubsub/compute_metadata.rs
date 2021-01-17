@@ -11,8 +11,9 @@ struct TokenResponse {
 
 /// TODO doc
 pub async fn get_token() -> std::result::Result<String, PsClientError> {
+    // https://www.googleapis.com/auth/cloud-platform
     let bytes = get_metadata(
-        "instance/service-accounts/default/token?scopes=https://www.googleapis.com/auth/datastore",
+        "instance/service-accounts/default/token?scopes=https://www.googleapis.com/auth/pubsub",
     )
         .await?;
     let body: TokenResponse = serde_json::from_slice(&bytes.to_vec())?;
