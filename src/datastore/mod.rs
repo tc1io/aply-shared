@@ -1,6 +1,6 @@
 pub use compute_metadata::get_project_id;
 pub use datastore_grpc::v1::*;
-use datastore_client::DatastoreClient;
+pub use datastore_client::DatastoreClient;
 use datastore_grpc::tonic::{
     metadata::MetadataValue,
     metadata::errors::InvalidMetadataValue,
@@ -51,7 +51,7 @@ pub enum DsClientError {
 }
 
 pub async fn get_client() -> Result<DatastoreClient<Channel>, DsClientError> {
-        match env::var("FIRESTORE_EMULATOR_HOST") {
+        match env::var("DATASTORE_EMULATOR_HOST") {
         Ok(addr) => {
             let endpoint = Channel::from_shared(addr.clone())?;
             let channel = endpoint.connect().await?;

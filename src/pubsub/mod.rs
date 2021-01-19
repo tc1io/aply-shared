@@ -45,15 +45,20 @@ pub enum PsClientError {
 
     #[error(transparent)]
     FooError(#[from] std::string::FromUtf8Error ),
+
+    #[error(transparent)]
+    InvalidUriError(#[from] http::uri::InvalidUri),
 }
 
 // <<<<<<< HEAD
 pub async fn get_client() -> Result<PublisherClient<Channel>, PsClientError> {
     // let mut addr = return match env::var("FIRESTORE_EMULATOR_HOST") {
         match env::var("PUBSUB_EMULATOR_HOST") {
-        Ok(_addr) => {
+        Ok(addr) => {
             // TODO : need to get the value from addr instead of hard-coded values
-            let endpoint = Channel::from_static("http://localhost:8200");
+            //let endpoint = Channel::from_static("http://localhost:8201");
+            //let endpoint = Channel::from_static("http://localhost:8201");
+            let endpoint = Channel::from_shared(addr.clone())?;
             // let add: &'static str = addr.;
             // let endpoint = Channel::from_static(add);
 // // =======
