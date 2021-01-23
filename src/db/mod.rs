@@ -101,17 +101,17 @@ pub trait Element {
 
 
 
-impl From<DbEntity> for ply::model::Assembly {
+impl From<DbEntity> for plykit::model::Assembly {
     fn from(d: DbEntity) -> Self {
-        ply::model::Assembly{
+        plykit::model::Assembly{
             name:d.0,
             description: "Assembly created from plain ID-string without any other data".to_owned(),
         }
     }
 }
 
-impl Element for ply::model::Assembly {
-    fn force_merge(self, _rhs:&ply::model::Assembly) -> ply::model::Assembly {
+impl Element for plykit::model::Assembly {
+    fn force_merge(self, _rhs:&plykit::model::Assembly) -> plykit::model::Assembly {
         // TODO need to deal with rhs
         self.clone()
     }

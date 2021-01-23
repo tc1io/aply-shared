@@ -3,7 +3,7 @@ extern crate serde;
 extern crate serde_json;
 extern crate futures;
 extern crate serde_derive;
-extern crate ply;
+extern crate plykit;
 
 pub mod page;
 pub mod web;
