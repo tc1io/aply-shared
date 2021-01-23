@@ -1,6 +1,6 @@
 [package]
 name = "aply_shared"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Jan Algermissen <algermissen@acm.org>"]
 edition = "2018"
 license = "MIT"
@@ -19,11 +19,10 @@ jsonwebtoken = "7.2.0"
 futures = "0.3.7"
 http = "0.2"
 
-firestore_grpc = "0.1"
 pubsub_grpc = "0.1"
 datastore_grpc = "0.1.1"
 hyper = "0.13"
-plykit = "0.1.3"
+plykit = "0.1.4"
 
 #plykit = { git = "https://github.com/plykit/ply-rust.git" }
 

@@ -7,8 +7,6 @@ extern crate plykit;
 
 pub mod page;
 pub mod web;
-pub mod db;
-pub mod firestore;
 pub mod pubsub;
 pub mod datastore;
 
