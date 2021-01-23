@@ -1,6 +1,6 @@
 [package]
 name = "aply_shared"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Jan Algermissen <algermissen@acm.org>"]
 edition = "2018"
 
@@ -20,8 +20,9 @@ firestore_grpc = "0.1"
 pubsub_grpc = "0.1"
 datastore_grpc = "0.1.1"
 hyper = "0.13"
+plykit = "0.1.2"
 
-ply = { git = "https://github.com/plykit/ply-rust.git" }
+#plykit = { git = "https://github.com/plykit/ply-rust.git" }
 
 #ply = { path = "../ply-rust" }
 #ply ={ git = "https://github.com/plykit/ply-rust.git", version = "0.1.0"}
