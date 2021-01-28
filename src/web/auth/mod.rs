@@ -1,5 +1,5 @@
-use std::convert::Infallible;
-use warp::{Filter, Rejection};
+// use std::convert::Infallible;
+// use warp::{Filter, Rejection};
 
 #[derive(Clone)]
 pub struct AuthProvider {}
@@ -25,21 +25,21 @@ impl Error {
 // }
 
 
-pub fn auth(
-    provider: AuthProvider,
-    attributes: ResourceAtts,
-) -> impl Filter<Extract = (Principal,), Error = Rejection> + Clone {
-
-    warp::header("authorization").and_then(|value: String| async move {
-        // if !value.as_bytes().starts_with(b"Bearer ") {
-        //     return warp::reject::not_found();
-        // }
-        if value.len() < 8 {
-            return futures::future::ready(Err(Error{}.into_rejection())).await;
-        }
-        let (a, x) = value.split_at("Bearer ".len());
-        println!("{}", x);
-        let principal: Principal = Principal {};
-        futures::future::ready(Ok(principal)).await
-    })
-}
+// pub fn auth(
+//     provider: AuthProvider,
+//     _attributes: ResourceAtts,
+// ) -> impl Filter<Extract = (Principal,), Error = Rejection> + Clone {
+//
+//     warp::header("authorization").and_then(|value: String| async move {
+//         // if !value.as_bytes().starts_with(b"Bearer ") {
+//         //     return warp::reject::not_found();
+//         // }
+//         if value.len() < 8 {
+//             return futures::future::ready(Err(Error{}.into_rejection())).await;
+//         }
+//         let (a, x) = value.split_at("Bearer ".len());
+//         println!("{}", x);
+//         let principal: Principal = Principal {};
+//         futures::future::ready(Ok(principal)).await
+//     })
+// }
