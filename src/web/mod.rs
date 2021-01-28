@@ -1,3 +1,5 @@
+pub mod auth;
+
 use serde_json;
 use serde::{Serialize, Deserialize};
 use jsonwebtoken::{ decode,  Algorithm, Validation, DecodingKey};
