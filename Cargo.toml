@@ -1,6 +1,6 @@
 [package]
 name = "aply_shared"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["Jan Algermissen <algermissen@acm.org>"]
 edition = "2018"
 license = "MIT"
