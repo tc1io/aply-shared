@@ -23,7 +23,7 @@ warp = "0.2.5"
 pubsub_grpc = "0.1"
 datastore_grpc = "0.1.1"
 hyper = "0.13"
-plykit = "0.1.6"
+plykit = "0.1.7"
 
 #plykit = { git = "https://github.com/plykit/ply-rust.git" }
 

@@ -51,7 +51,7 @@ pub fn validate(token:String) -> Result<Claims,String> {
     //     print!("{}", String::from_utf8_lossy(bytes));
     // let tok2 = encode(&Header::new(Algorithm::RS256), &claims, &EncodingKey::from_rsa_pem(bytes).expect("xx"));
 
-    let tok = decode::<Claims>(token.as_str(), &DecodingKey::from_rsa_pem(b).expect("sdddd"), &Validation::new(Algorithm::RS256)).expect("not valid");
+    let tok = decode::<Claims>(token.as_str(), &DecodingKey::from_rsa_pem(b).expect("sxxdddd"), &Validation::new(Algorithm::RS256)).expect("not valid");
 
     Ok(tok.claims)
 }
