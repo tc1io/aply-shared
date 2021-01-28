@@ -1,10 +1,12 @@
 /// A string that is a valid solution ID.
+#[derive(Debug, Clone)]
 pub struct SolutionId(pub String);
 
 /// Generic error for turning strings into more constrained string types.
 #[derive(Clone, Debug)]
 pub struct StringError { cause:String }
 
+// TODO Implement real validity check and develop consistent error strategy for these things.
 impl std::str::FromStr for SolutionId {
     type Err = StringError;
 
