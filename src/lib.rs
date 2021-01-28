@@ -3,13 +3,11 @@ extern crate serde;
 extern crate serde_json;
 extern crate futures;
 extern crate serde_derive;
-// extern crate plykit;
 
 pub mod page;
 pub mod web;
 pub mod pubsub;
 pub mod datastore;
-pub mod ent;
 
 #[cfg(test)]
 mod tests {
