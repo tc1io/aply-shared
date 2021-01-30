@@ -1,4 +1,3 @@
-pub mod auth;
 
 use serde_json;
 use serde::{Serialize, Deserialize};
