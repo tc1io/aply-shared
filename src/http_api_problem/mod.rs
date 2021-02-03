@@ -84,7 +84,6 @@ pub use api_error::*;
 #[cfg(feature = "actix-web")]
 use actix_web_crate as actix_web;
 
-use warp::reply::Response;
 use http::StatusCode;
 
 // pub use http::StatusCode;
