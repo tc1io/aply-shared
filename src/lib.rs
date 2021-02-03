@@ -8,7 +8,7 @@ pub mod page;
 pub mod web;
 pub mod pubsub;
 pub mod datastore;
-pub mod problem;
+pub mod http_api_problem;
 
 #[cfg(test)]
 mod tests {
