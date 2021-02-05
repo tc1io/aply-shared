@@ -75,7 +75,8 @@ pub async fn get_client() -> Result<PublisherClient<Channel>, PsClientError> {
             Ok(service)
         }
         Err(_e) => {
-            let endpoint = Channel::from_static(URL).tls_config(ClientTlsConfig::new().domain_name(DOMAIN));
+            let endpoint = Channel::from_static(URL).tls_config(ClientTlsConfig::new().domain_name(DOMAIN)).expect("TODO - handle the connect error");
+
             let (channel, token) = try_join!(
                 endpoint.connect().map_err(|e| PsClientError::from(e)),
                 compute_metadata::get_token()
